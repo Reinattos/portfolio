@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renato Herisson - Portfólio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Navegação -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">RH</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#projetos">Projetos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero/Home -->
+  <section id="home" class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <svg class="name-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100">
+          <!-- Texto com animação de desenho -->
+          <text x="50%" y="70" class="name-text-svg" text-anchor="middle">Renato Herisson</text>
+        </svg>
+        <p class="subtitle">Desenvolvedor | Profissional de Tecnologia</p>
+        <p class="description">
+          Criando soluções web modernas e inovadoras com foco em qualidade, 
+          performance e experiência do usuário.
+        </p>
+        <a href="#contato" class="btn btn-primary">Entre em Contato</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="about">
+    <div class="container">
+      <h2>Sobre</h2>
+      <div class="about-content">
+        <p>
+          Sou um desenvolvedor apaixonado por criar interfaces web que funcionam bem e se parecem bem.
+          Com experiência em múltiplas tecnologias, sempre buscando aprender e implementar as melhores práticas.
+        </p>
+        <div class="skills">
+          <h3>Habilidades</h3>
+          <div class="skills-grid">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express</span>
+            <span class="skill-tag">Banco de Dados</span>
+            <span class="skill-tag">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projetos -->
+  <section id="projetos" class="projects">
+    <div class="container">
+      <h2>Projetos</h2>
+      <div class="project-list">
+        <div class="project-card">
+          <h3>Projeto 1</h3>
+          <p class="project-tech">HTML, CSS, JavaScript</p>
+          <p>Descrição do primeiro projeto e tecnologias utilizadas.</p>
+          <a href="#" class="project-link">Ver Projeto →</a>
+        </div>
+        <div class="project-card">
+          <h3>Projeto 2</h3>
+          <p class="project-tech">React, Node.js, MongoDB</p>
+          <p>Descrição do segundo projeto com stack completo.</p>
+          <a href="#" class="project-link">Ver Projeto →</a>
+        </div>
+        <div class="project-card">
+          <h3>Projeto 3</h3>
+          <p class="project-tech">Express, SQLite, JavaScript</p>
+          <p>Descrição do terceiro projeto e soluções implementadas.</p>
+          <a href="#" class="project-link">Ver Projeto →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="contact">
+    <div class="container">
+      <h2>Contato</h2>
+      <p class="contact-intro">Tem uma pergunta ou proposta? Envie uma mensagem!</p>
+      <form id="form-contato" class="contact-form">
+        <input type="text" id="nome" placeholder="Seu Nome" required>
+        <input type="email" id="email" placeholder="Seu Email" required>
+        <textarea id="mensagem" placeholder="Sua Mensagem" rows="5" required></textarea>
+        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+      </form>
+      <div id="mensagem-resposta" class="resposta"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 Renato Herisson. Todos os direitos reservados.</p>
+      <div class="social-links">
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="mailto:seu-email@example.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
