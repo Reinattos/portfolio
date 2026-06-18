@@ -1,11 +1,18 @@
-// Manipula o envio do formulário de contato
+﻿// Manipula o envio do formulário de contato
 document.getElementById('form-contato').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const mensagem = document.getElementById('mensagem').value;
+  const form = e.currentTarget;
+  const botao = form.querySelector('button[type="submit"]');
+  const nome = document.getElementById('nome').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const mensagem = document.getElementById('mensagem').value.trim();
   const respostaDiv = document.getElementById('mensagem-resposta');
+
+  respostaDiv.style.color = '#555555';
+  respostaDiv.textContent = 'Enviando mensagem...';
+  botao.disabled = true;
+  botao.textContent = 'Enviando...';
 
   try {
     const response = await fetch('/api/contato', {
@@ -18,24 +25,26 @@ document.getElementById('form-contato').addEventListener('submit', async (e) => 
 
     const data = await response.json();
 
-    if (data.sucesso) {
-      respostaDiv.style.color = 'green';
-      respostaDiv.textContent = '✅ Mensagem enviada com sucesso!';
-      document.getElementById('form-contato').reset();
+    if (response.ok && data.sucesso) {
+      respostaDiv.style.color = '#137a43';
+      respostaDiv.textContent = data.mensagem || 'Mensagem enviada com sucesso!';
+      form.reset();
     } else {
-      respostaDiv.style.color = 'red';
-      respostaDiv.textContent = '❌ Erro ao enviar mensagem.';
+      respostaDiv.style.color = '#b3261e';
+      respostaDiv.textContent = data.mensagem || 'Erro ao enviar mensagem.';
     }
   } catch (error) {
     console.error('Erro:', error);
-    respostaDiv.style.color = 'red';
-    respostaDiv.textContent = '❌ Erro na conexão com o servidor.';
+    respostaDiv.style.color = '#b3261e';
+    respostaDiv.textContent = 'Erro na conexão com o servidor.';
+  } finally {
+    botao.disabled = false;
+    botao.textContent = 'Enviar Mensagem';
   }
 
-  // Limpa mensagem após 3 segundos
   setTimeout(() => {
     respostaDiv.textContent = '';
-  }, 3000);
+  }, 5000);
 });
 
 // Smooth scroll nos links de navegação

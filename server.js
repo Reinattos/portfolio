@@ -1,37 +1,83 @@
-const express = require('express');
+﻿const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
+const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
 const PORT = 3000;
+const dbDir = path.join(__dirname, 'db');
+const dbPath = path.join(dbDir, 'contatos.sqlite');
 
-// Middlewares
+fs.mkdirSync(dbDir, { recursive: true });
+
+const db = new sqlite3.Database(dbPath, (error) => {
+  if (error) {
+    console.error('Erro ao abrir banco de dados:', error.message);
+    return;
+  }
+
+  db.run(`
+    CREATE TABLE IF NOT EXISTS contatos (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL,
+      email TEXT NOT NULL,
+      mensagem TEXT NOT NULL,
+      criado_em TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Rota inicial
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Rota teste da API
 app.get('/api/teste', (req, res) => {
   res.json({ mensagem: 'API funcionando!' });
 });
 
-// Rota para receber contato (será implementada depois)
 app.post('/api/contato', (req, res) => {
-  const { nome, email, mensagem } = req.body;
-  
-  // Por enquanto apenas retorna sucesso
-  res.json({ 
-    sucesso: true, 
-    mensagem: 'Mensagem recebida com sucesso!' 
+  const nome = String(req.body.nome || '').trim();
+  const email = String(req.body.email || '').trim();
+  const mensagem = String(req.body.mensagem || '').trim();
+
+  if (!nome || !email || !mensagem) {
+    return res.status(400).json({
+      sucesso: false,
+      mensagem: 'Preencha nome, email e mensagem.'
+    });
+  }
+
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    return res.status(400).json({
+      sucesso: false,
+      mensagem: 'Informe um email válido.'
+    });
+  }
+
+  const sql = 'INSERT INTO contatos (nome, email, mensagem) VALUES (?, ?, ?)';
+
+  db.run(sql, [nome, email, mensagem], function (error) {
+    if (error) {
+      console.error('Erro ao salvar contato:', error.message);
+      return res.status(500).json({
+        sucesso: false,
+        mensagem: 'Não foi possível salvar a mensagem agora.'
+      });
+    }
+
+    res.status(201).json({
+      sucesso: true,
+      id: this.lastID,
+      mensagem: 'Mensagem enviada e salva com sucesso!'
+    });
   });
 });
 
-// Inicia servidor
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

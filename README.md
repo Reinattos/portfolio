@@ -1,10 +1,10 @@
-# Portfólio Renato Herisson
+# Portfolio Renato Herisson
 
-Portfolio website profissional com design minimalista (tema cinza claro #f5f5f5) e formulário de contato.
+Portfolio profissional com frontend responsivo, estilo visual autoral e formulario de contato conectado a um banco SQLite local.
 
-## 🚀 Como Rodar
+## Como Rodar
 
-### 1. Instalar Dependências
+### 1. Instalar Dependencias
 ```bash
 npm install
 ```
@@ -13,46 +13,50 @@ npm install
 ```bash
 npm start
 ```
+
 Acesso: `http://localhost:3000`
 
-## ✅ Status Atual
+## Status Atual
 
-### ✨ Completo
-- ✅ Estrutura HTML completa (navbar, hero, about, projects, contact, footer)
-- ✅ Tema CSS clean (cinza claro #f5f5f5)
-- ✅ Animações fluidas (nome desliza da esquerda, smooth scroll)
-- ✅ Formulário de contato (frontend 100% funcional)
-- ✅ Design responsivo (mobile, tablet, desktop)
-- ✅ Servidor Express rodando porta 3000
-- ✅ Node.js v26.3.0 + npm v11.16.0 configurados
+### Completo
+- Estrutura HTML completa: navbar, hero, sobre, projetos, contato e footer
+- Tema visual escuro com cores de destaque
+- Animacoes fluidas e smooth scroll
+- Formulario de contato funcional no frontend
+- API de contato salvando mensagens no SQLite
+- Design responsivo para mobile, tablet e desktop
+- Servidor Express configurado na porta 3000
 
-### 📦 Dependências Instaladas
+### Dependencias Instaladas
 - express@4.18.2
-- sqlite3@5.1.6 (instalado, não conectado)
+- sqlite3@5.1.6
 - cors@2.8.5
-- nodemailer@6.9.1 (instalado, não configurado)
+- nodemailer@6.9.1
 - nodemon@2.0.20
 
-### ⏳ Próximas Etapas
-- [ ] Banco de dados: Conectar SQLite e salvar mensagens
-- [ ] Email: Configurar Nodemailer para notificações
-- [ ] Conteúdo: Preencher bio, projetos reais, links sociais
-- [ ] Deploy: Colocar em produção
+### Proximas Etapas
+- [ ] Email: configurar Nodemailer para notificacoes
+- [ ] Conteudo: adicionar projetos reais
+- [ ] Deploy: colocar em producao
 
-## 📁 Estrutura
+## Estrutura
 
-```
-Teste/
+```text
+portfolio/
 ├── server.js              # Express server
-├── package.json           # Dependências
+├── package.json           # Dependencias
 ├── public/
-│   ├── index.html         # Página principal
+│   ├── index.html         # Pagina principal
 │   ├── css/
-│   │   └── style.css      # Estilos e animações
+│   │   └── style.css      # Estilos e animacoes
 │   └── js/
-│       └── script.js      # Lógica frontend
-└── db/                    # Pasta para SQLite
+│       └── script.js      # Logica frontend
+└── db/                    # Banco SQLite local, ignorado no Git
 ```
+
+## Observacao para GitHub
+
+Os arquivos `node_modules/`, banco local em `db/*.sqlite`, zips de backup e `.env` ficam fora do repositorio pelo `.gitignore`.
 
 ---
-**Última atualização**: 15/06/2026 | Desenvolvido com ❤️
+Ultima atualizacao: 18/06/2026

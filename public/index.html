@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -24,16 +24,43 @@
   <section id="home" class="hero">
     <div class="container hero-content">
       <div class="hero-text">
-        <svg class="name-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100">
-          <!-- Texto com animação de desenho -->
-          <text x="50%" y="70" class="name-text-svg" text-anchor="middle">Renato Herisson</text>
-        </svg>
-        <p class="subtitle">Desenvolvedor | Profissional de Tecnologia</p>
+        <h1>Renato Herisson</h1>
+        <p class="subtitle">Desenvolvedor e Profissional de Tecnologia</p>
         <p class="description">
-          Criando soluções web modernas e inovadoras com foco em qualidade, 
-          performance e experiência do usuário.
+          Transformo ideias em soluções digitais rápidas, organizadas e fáceis de usar,
+          unindo desenvolvimento web, automação e visão prática de negócio.
         </p>
-        <a href="#contato" class="btn btn-primary">Entre em Contato</a>
+        <div class="hero-actions">
+          <a href="#projetos" class="btn btn-primary">Ver Projetos</a>
+          <a href="#contato" class="btn btn-secondary">Falar Comigo</a>
+        </div>
+      </div>
+      <div class="hero-panel" aria-label="Resumo profissional">
+        <svg class="hero-doodle" viewBox="0 0 280 220" aria-hidden="true">
+          <path class="doodle-line" d="M42 148 C82 40, 176 42, 212 106 S194 206, 105 181" />
+          <circle class="doodle-dot dot-one" cx="82" cy="70" r="16" />
+          <circle class="doodle-dot dot-two" cx="205" cy="105" r="22" />
+          <path class="doodle-spark" d="M68 166 l12 18 l20 -10 l-9 23 l18 12 l-25 2 l-11 22 l-7 -24 l-24 -5 l21 -13 z" />
+        </svg>
+        <div class="hero-card highlight-card">
+          <span class="card-label">Foco</span>
+          <strong>Web, sistemas e automações</strong>
+          <p>Soluções com interface limpa, boa performance e estrutura pronta para evoluir.</p>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <strong>Front</strong>
+            <span>HTML, CSS, JS</span>
+          </div>
+          <div>
+            <strong>Back</strong>
+            <span>Python</span>
+          </div>
+          <div>
+            <strong>Dados</strong>
+            <span>SQLite e APIs</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -47,15 +74,17 @@
           Sou um desenvolvedor apaixonado por criar interfaces web que funcionam bem e se parecem bem.
           Com experiência em múltiplas tecnologias, sempre buscando aprender e implementar as melhores práticas.
         </p>
+        <div class="about-socials" aria-label="Redes sociais">
+          <a href="https://www.linkedin.com/in/reinatos/" class="btn btn-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/Reinattos" class="btn btn-social" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
         <div class="skills">
           <h3>Habilidades</h3>
           <div class="skills-grid">
             <span class="skill-tag">HTML</span>
             <span class="skill-tag">CSS</span>
             <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Express</span>
+            <span class="skill-tag">Python</span>
             <span class="skill-tag">Banco de Dados</span>
             <span class="skill-tag">Git</span>
           </div>
@@ -68,25 +97,13 @@
   <section id="projetos" class="projects">
     <div class="container">
       <h2>Projetos</h2>
-      <div class="project-list">
-        <div class="project-card">
-          <h3>Projeto 1</h3>
-          <p class="project-tech">HTML, CSS, JavaScript</p>
-          <p>Descrição do primeiro projeto e tecnologias utilizadas.</p>
-          <a href="#" class="project-link">Ver Projeto →</a>
-        </div>
-        <div class="project-card">
-          <h3>Projeto 2</h3>
-          <p class="project-tech">React, Node.js, MongoDB</p>
-          <p>Descrição do segundo projeto com stack completo.</p>
-          <a href="#" class="project-link">Ver Projeto →</a>
-        </div>
-        <div class="project-card">
-          <h3>Projeto 3</h3>
-          <p class="project-tech">Express, SQLite, JavaScript</p>
-          <p>Descrição do terceiro projeto e soluções implementadas.</p>
-          <a href="#" class="project-link">Ver Projeto →</a>
-        </div>
+      <div class="project-empty">
+        <h3>Projetos em desenvolvimento</h3>
+        <p>
+          Estou construindo meus primeiros projetos públicos. Em breve esta seção terá aplicações,
+          automações e estudos práticos com as tecnologias que estou desenvolvendo.
+        </p>
+        <a href="https://github.com/Reinattos" class="project-link" target="_blank" rel="noopener noreferrer">Acompanhar no GitHub &rarr;</a>
       </div>
     </div>
   </section>
@@ -109,10 +126,10 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2024 Renato Herisson. Todos os direitos reservados.</p>
+      <p>&copy; 2026 Renato Herisson. Todos os direitos reservados.</p>
       <div class="social-links">
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/reinatos/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://github.com/Reinattos" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a href="mailto:seu-email@example.com">Email</a>
       </div>
     </div>
@@ -121,3 +138,13 @@
   <script src="js/script.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
