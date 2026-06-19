@@ -1,4 +1,5 @@
 const { createClient } = require('@supabase/supabase-js');
+const { sendContactEmail } = require('../lib/mailer');
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -72,6 +73,20 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({
       sucesso: false,
       mensagem: 'Não foi possível salvar a mensagem agora.'
+    });
+  }
+
+  try {
+    const emailResult = await sendContactEmail(validation.contato);
+
+    if (emailResult.skipped) {
+      console.warn('Email de contato não enviado: SMTP não configurado.');
+    }
+  } catch (emailError) {
+    console.error('Erro ao enviar email de contato:', emailError.message);
+    return res.status(500).json({
+      sucesso: false,
+      mensagem: 'Mensagem salva, mas não foi possível enviar o email agora.'
     });
   }
 

@@ -3,6 +3,10 @@ const cors = require('cors');
 const path = require('path');
 const fs = require('fs');
 const sqlite3 = require('sqlite3').verbose();
+const loadEnv = require('./lib/loadEnv');
+const { sendContactEmail } = require('./lib/mailer');
+
+loadEnv();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -61,12 +65,26 @@ app.post('/api/contato', (req, res) => {
 
   const sql = 'INSERT INTO contatos (nome, email, mensagem) VALUES (?, ?, ?)';
 
-  db.run(sql, [nome, email, mensagem], function (error) {
+  db.run(sql, [nome, email, mensagem], async function (error) {
     if (error) {
       console.error('Erro ao salvar contato:', error.message);
       return res.status(500).json({
         sucesso: false,
         mensagem: 'Não foi possível salvar a mensagem agora.'
+      });
+    }
+
+    try {
+      const emailResult = await sendContactEmail({ nome, email, mensagem });
+
+      if (emailResult.skipped) {
+        console.warn('Email de contato não enviado: SMTP não configurado.');
+      }
+    } catch (emailError) {
+      console.error('Erro ao enviar email de contato:', emailError.message);
+      return res.status(500).json({
+        sucesso: false,
+        mensagem: 'Mensagem salva, mas não foi possível enviar o email agora.'
       });
     }
 
