@@ -1,6 +1,6 @@
 # Portfolio Renato Herisson
 
-Portfolio profissional com frontend responsivo, estilo visual autoral e formulario de contato conectado a SQLite no ambiente local. Para deploy na Vercel, a API em `api/contato.js` usa Supabase.
+Portfolio profissional com frontend responsivo, estilo visual autoral e formulario de contato conectado a SQLite no ambiente local. Para deploy na Vercel, a API em `api/contato.js` usa Supabase..
 
 ## Como Rodar
 
