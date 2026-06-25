@@ -26,7 +26,7 @@ function validateContato(body = {}) {
       status: 400,
       payload: {
         sucesso: false,
-        mensagem: 'Informe um email válido.'
+        mensagem: 'Informe um email valido.'
       }
     };
   }
@@ -39,14 +39,7 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({
       sucesso: false,
-      mensagem: 'Método não permitido.'
-    });
-  }
-
-  if (!supabaseUrl || !supabaseKey) {
-    return res.status(500).json({
-      sucesso: false,
-      mensagem: 'Banco de dados não configurado.'
+      mensagem: 'Metodo nao permitido.'
     });
   }
 
@@ -54,6 +47,13 @@ module.exports = async function handler(req, res) {
 
   if (!validation.valid) {
     return res.status(validation.status).json(validation.payload);
+  }
+
+  if (!supabaseUrl || !supabaseKey) {
+    return res.status(500).json({
+      sucesso: false,
+      mensagem: 'Banco de dados nao configurado.'
+    });
   }
 
   const supabase = createClient(supabaseUrl, supabaseKey, {
@@ -72,7 +72,7 @@ module.exports = async function handler(req, res) {
     console.error('Erro ao salvar contato:', error.message);
     return res.status(500).json({
       sucesso: false,
-      mensagem: 'Não foi possível salvar a mensagem agora.'
+      mensagem: 'Nao foi possivel salvar a mensagem agora.'
     });
   }
 
@@ -80,13 +80,13 @@ module.exports = async function handler(req, res) {
     const emailResult = await sendContactEmail(validation.contato);
 
     if (emailResult.skipped) {
-      console.warn('Email de contato não enviado: SMTP não configurado.');
+      console.warn('Email de contato nao enviado: SMTP nao configurado.');
     }
   } catch (emailError) {
     console.error('Erro ao enviar email de contato:', emailError.message);
     return res.status(500).json({
       sucesso: false,
-      mensagem: 'Mensagem salva, mas não foi possível enviar o email agora.'
+      mensagem: 'Mensagem salva, mas nao foi possivel enviar o email agora.'
     });
   }
 

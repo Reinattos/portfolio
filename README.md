@@ -34,6 +34,15 @@ CONTACT_FROM_EMAIL=seu-email@gmail.com
 
 Para Gmail, use uma senha de app da sua conta Google. Nao use sua senha normal da conta.
 
+## Supabase e Vercel
+
+Para publicar na Vercel:
+
+1. Crie a tabela do Supabase usando `supabase.sql`.
+2. Configure as variaveis `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` no painel da Vercel.
+3. Configure as variaveis SMTP na Vercel se quiser envio de email em producao.
+4. Faca o deploy conectado ao repositorio GitHub.
+
 ## Status Atual
 
 ### Completo
@@ -41,37 +50,40 @@ Para Gmail, use uma senha de app da sua conta Google. Nao use sua senha normal d
 - Tema visual escuro com cores de destaque
 - Animacoes fluidas e smooth scroll
 - Formulario de contato funcional no frontend
-- API de contato salvando mensagens no SQLite
+- API de contato salvando mensagens no SQLite local
+- Rota serverless para deploy na Vercel usando Supabase
 - Envio de email via Nodemailer quando SMTP estiver configurado
 - Design responsivo para mobile, tablet e desktop
 - Servidor Express configurado na porta 3000
-- Rota serverless para deploy na Vercel usando Supabase
 
 ### Dependencias Instaladas
-- express@4.18.2
-- sqlite3@5.1.6
-- cors@2.8.5
-- nodemailer@6.9.1
-- nodemon@2.0.20
-
-### Para publicar na Vercel
-- Criar a tabela do Supabase usando `supabase.sql`
-- Configurar as variaveis `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY`
-- Fazer o deploy conectado ao repositorio GitHub
+- express@4.22.2
+- sqlite3@5.1.7
+- cors@2.8.6
+- nodemailer@6.10.1
+- @supabase/supabase-js@2.108.2
+- nodemon@2.0.22
 
 ## Estrutura
 
 ```text
 portfolio/
-├── server.js              # Express server
-├── package.json           # Dependencias
-├── public/
-│   ├── index.html         # Pagina principal
-│   ├── css/
-│   │   └── style.css      # Estilos e animacoes
-│   └── js/
-│       └── script.js      # Logica frontend
-└── db/                    # Banco SQLite local, ignorado no Git
+|-- server.js              # Express server local
+|-- package.json           # Dependencias e scripts
+|-- vercel.json            # Rewrites para Vercel
+|-- supabase.sql           # Tabela de contatos para Supabase
+|-- api/
+|   `-- contato.js         # API serverless para Vercel
+|-- lib/
+|   |-- loadEnv.js         # Leitura simples do .env local
+|   `-- mailer.js          # Envio de email via Nodemailer
+|-- public/
+|   |-- index.html         # Pagina principal
+|   |-- css/
+|   |   `-- style.css      # Estilos e animacoes
+|   `-- js/
+|       `-- script.js      # Logica frontend
+`-- db/                    # Banco SQLite local, ignorado no Git
 ```
 
 ## Observacao para GitHub
@@ -79,4 +91,4 @@ portfolio/
 Os arquivos `node_modules/`, banco local em `db/*.sqlite`, zips de backup e `.env` ficam fora do repositorio pelo `.gitignore`.
 
 ---
-Ultima atualizacao: 18/06/2026
+Ultima verificacao: 25/06/2026
