@@ -1,50 +1,60 @@
-﻿// Manipula o envio do formulário de contato
-document.getElementById('form-contato').addEventListener('submit', async (e) => {
+﻿const CONTACT_EMAIL = 'reinatos1996@gmail.com';
+
+function encodeMailto(value) {
+  return encodeURIComponent(value).replace(/%20/g, '+');
+}
+
+function buildMailtoLink({ nome, email, mensagem }) {
+  const subject = `Contato pelo portfólio - ${nome}`;
+  const body = [
+    `Nome: ${nome}`,
+    `Email: ${email}`,
+    '',
+    'Mensagem:',
+    mensagem
+  ].join('\n');
+
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeMailto(subject)}&body=${encodeMailto(body)}`;
+}
+
+// Manipula o envio do formulário de contato
+const contatoForm = document.getElementById('form-contato');
+const respostaDiv = document.getElementById('mensagem-resposta');
+
+contatoForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  const form = e.currentTarget;
-  const botao = form.querySelector('button[type="submit"]');
   const nome = document.getElementById('nome').value.trim();
   const email = document.getElementById('email').value.trim();
   const mensagem = document.getElementById('mensagem').value.trim();
-  const respostaDiv = document.getElementById('mensagem-resposta');
+  const botao = contatoForm.querySelector('button[type="submit"]');
 
-  respostaDiv.style.color = '#555555';
-  respostaDiv.textContent = 'Enviando mensagem...';
-  botao.disabled = true;
-  botao.textContent = 'Enviando...';
-
-  try {
-    const response = await fetch('/api/contato', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ nome, email, mensagem })
-    });
-
-    const data = await response.json();
-
-    if (response.ok && data.sucesso) {
-      respostaDiv.style.color = '#137a43';
-      respostaDiv.textContent = data.mensagem || 'Mensagem enviada com sucesso!';
-      form.reset();
-    } else {
-      respostaDiv.style.color = '#b3261e';
-      respostaDiv.textContent = data.mensagem || 'Erro ao enviar mensagem.';
-    }
-  } catch (error) {
-    console.error('Erro:', error);
+  if (!nome || !email || !mensagem) {
     respostaDiv.style.color = '#b3261e';
-    respostaDiv.textContent = 'Erro na conexão com o servidor.';
-  } finally {
-    botao.disabled = false;
-    botao.textContent = 'Enviar Mensagem';
+    respostaDiv.textContent = 'Preencha nome, email e mensagem.';
+    return;
   }
 
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    respostaDiv.style.color = '#b3261e';
+    respostaDiv.textContent = 'Informe um email válido.';
+    return;
+  }
+
+  respostaDiv.style.color = '#555555';
+  respostaDiv.textContent = 'Abrindo seu cliente de email...';
+  botao.disabled = true;
+  botao.textContent = 'Abrindo email...';
+
+  const mailtoLink = buildMailtoLink({ nome, email, mensagem });
+  window.location.href = mailtoLink;
+
   setTimeout(() => {
-    respostaDiv.textContent = '';
-  }, 5000);
+    respostaDiv.style.color = '#137a43';
+    respostaDiv.textContent = 'Se o cliente de email não abriu, verifique seu navegador ou copie o conteúdo manualmente.';
+    botao.disabled = false;
+    botao.textContent = 'Enviar Mensagem';
+  }, 3000);
 });
 
 // Smooth scroll nos links de navegação
